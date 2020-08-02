@@ -1,0 +1,23 @@
+@import "./../../../../projects/simple-ui-component/src/lib/core/pallete";
+@import "./../../../../projects/simple-ui-component/src/lib/core/input";
+
+:host {
+  .suic-input {
+    background-color: $color-input-inactive-background;
+    border-radius: $input-border-radius;
+    color: $input-font-color;
+    font-size: $input-font-size;
+    line-height: $input-min-height;
+    max-width: 100%;
+    min-height: $input-min-height;
+    padding: $input-padding;
+
+    .suic-input__placeholder {
+
+    }
+  }
+
+  .suic-select {
+    width: 100%;
+  }
+}

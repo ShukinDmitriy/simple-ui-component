@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "simple-ui-component": {
+    "simple-ui-component-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/simple-ui-component",
+            "outputPath": "dist/simple-ui-component-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "simple-ui-component:build"
+            "browserTarget": "simple-ui-component-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "simple-ui-component:build:production"
+              "browserTarget": "simple-ui-component-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "simple-ui-component:build"
+            "browserTarget": "simple-ui-component-demo:build"
           }
         },
         "test": {
@@ -114,15 +114,55 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "simple-ui-component:serve"
+            "devServerTarget": "simple-ui-component-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "simple-ui-component:serve:production"
+              "devServerTarget": "simple-ui-component-demo:serve:production"
             }
           }
         }
       }
+    },
+    "simple-ui-component": {
+      "projectType": "library",
+      "root": "projects/simple-ui-component",
+      "sourceRoot": "projects/simple-ui-component/src",
+      "prefix": "suic",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/simple-ui-component/tsconfig.lib.json",
+            "project": "projects/simple-ui-component/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/simple-ui-component/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/simple-ui-component/src/test.ts",
+            "tsConfig": "projects/simple-ui-component/tsconfig.spec.json",
+            "karmaConfig": "projects/simple-ui-component/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/simple-ui-component/tsconfig.lib.json",
+              "projects/simple-ui-component/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
-  "defaultProject": "simple-ui-component"
+  "defaultProject": "simple-ui-component-demo"
 }
